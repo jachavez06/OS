@@ -9,9 +9,11 @@ Structure put on hiatus until project becomes more complete.
 ## Building
 
 To assemble into machine code:
-
-`nasm boot_sect.asm -f bin -o boot_sect.bin`
+```bash
+nasm boot_sect.asm -f bin -o boot_sect.bin
+```
 
 To run:
-
-`qemu-system-i386 -drive file=boot_sect.bin,format=raw`
+```bash
+qemu-system-i386 -drive file=boot_sect.bin,format=raw
+```
