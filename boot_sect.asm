@@ -19,6 +19,18 @@ mov dh, 0	; Cursor row
 mov dl, 0	; Cursor column
 int 10h		; Move cursor to (0,0)	
 
+%include "print_function.asm"
+mov al, 'H'
+call print_char
+mov al, 'e'
+call print_char
+mov al, 'l'
+call print_char
+mov al, 'l'
+call print_char
+mov al, 'o'
+call print_char
+
 ; Loop forever
 jmp $
 
