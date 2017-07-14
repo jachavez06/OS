@@ -1,28 +1,29 @@
 ;
 ; A simple boot sector program that loops forever.
 ;
+[org 0x7c00]
 
-; GRAPHICS MODE
-; mov ax, 0
-; int 10h
+; Scroll window up
+mov ah, 6  	; Function number  	
+mov al, 0	; Scroll entire window
+mov bh, 7	; Normal b&w colors
+mov cx, 0	; Upper left is (0,0)
+mov dh, 0x18
+mov dl, 0x4f	; Combined, lower right is (18h, 4f)
+int 10h		; Clear screen
 
-MOV AH, 6    ;THIS WILL CLEAR SCREEN
-MOV AL, 0
-MOV BH, 7
-MOV CX, 0
-MOV DL, 79
-MOV DH, 24
-INT 10H
+; Set cursor position
+mov ah, 2	; Function number
+mov bh, 0	; Page number
+mov dh, 0	; Cursor row
+mov dl, 0	; Cursor column
+int 10h		; Move cursor to (0,0)	
 
-MOV AH,2       ;THIS WILL CONTROL CURSOR LOCATION
-MOV BH,0
-MOV DH,0
-MOV DL,0
-INT 10H
-
+; Loop forever
 jmp $
 
-
+; Pad
 times 510-($-$$) db 0
 
+; Secret
 dw 0xaa55
