@@ -1,31 +1,44 @@
 ;
-; A simple boot sector program that loops forever.
+; A simple boot sector program.
 ;
-[org 0x7c00]
+[org 0x7c00]  ; Allow to use Labels w/o adding  0x7c00
 
 ; Scroll window up
-mov ah, 6  	; Function number  	
-mov al, 0	; Scroll entire window
-mov bh, 7	; Normal b&w colors
-mov cx, 0	; Upper left is (0,0)
+mov ah, 6  	  ; Function number  	
+mov al, 0	    ; Scroll entire window
+mov bh, 7	    ; Normal b&w colors
+mov cx, 0	    ; Upper left is (0,0)
 mov dh, 0x18
 mov dl, 0x4f	; Combined, lower right is (18h, 4f)
-int 10h		; Clear screen
+int 0x10		  ; Clear screen
 
 ; Set cursor position
-mov ah, 2	; Function number
-mov bh, 0	; Page number
-mov dh, 0	; Cursor row
-mov dl, 0	; Cursor column
-int 10h		; Move cursor to (0,0)	
+mov ah, 2	    ; Function number
+mov bh, 0	    ; Page number
+mov dh, 0	    ; Cursor row
+mov dl, 0	    ; Cursor column
+int 0x10		  ; Move cursor to (0,0)	
 
-mov al, 'H'
+; Print first letter
+mov bx, my_string
+mov al, [bx]
 call print_char
-mov al, 'i'
-call print_char
 
-jmp $ ; Hang
+looping:
+  add bx, 1
+  cmp byte [bx],0
+  je end
+  mov al, [bx]
+  call print_char
+  jmp looping
+end:
 
+
+jmp $         ; Hang
+
+my_string:
+  db 'Boot OS',0
+  
 %include "print_function.asm"
 
 ; Padding
