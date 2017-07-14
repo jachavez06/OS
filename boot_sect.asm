@@ -22,8 +22,8 @@ int 10h		; Move cursor to (0,0)
 ; Loop forever
 jmp $
 
-; Pad
+; Padding
 times 510-($-$$) db 0
 
-; Secret
+; Magic number
 dw 0xaa55
