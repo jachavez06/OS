@@ -4,7 +4,7 @@
 Structure put on hiatus until project becomes more complete. 
 
 ## Objectives 
-* Bootloader
+* Boot Sector
 
 ## Building
 
