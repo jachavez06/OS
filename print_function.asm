@@ -6,13 +6,14 @@ printc:
 
 ; Input: bx = string to print.
 prints:
-  cmp byte [bx], 0      ; Check that char non-null
-  je end                ; End if == 0
-  mov al, [bx]          ; Move contents of current address to al
-  call printc           ; Print al
-  add bx, 1             ; Increment by 1
-  jmp prints            ; loop
-
-  
- end:
-  ret
+  push eax                ; Push eax because will use al
+  prints_loop:
+    cmp byte [bx], 0      ; Check that char non-null
+    je prints_end         ; End if == 0
+    mov al, [bx]          ; Move contents of current address to al
+    call printc           ; Print al
+    add bx, 1             ; Increment by 1
+    jmp prints_loop       ; loop
+  prints_end:
+    pop eax               ; Return eax to original value
+    ret
