@@ -19,6 +19,10 @@ mov dh, 0	    ; Cursor row
 mov dl, 0	    ; Cursor column
 int 0x10		  ; Move cursor to (0,0)	
 
+; Print string
+mov al, [bx]
+call prints
+
 ; Print first letter
 mov bx, my_string
 mov al, [bx]
