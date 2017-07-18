@@ -1,7 +1,6 @@
 # OS
 
-~~This project adheres to the Filesystem Hierarchy Standard (FHS).~~
-Structure put on hiatus until project becomes more complete. 
+My adventure to build an OS from scratch. Most of the code is written in either Assembly or C. 
 
 ## Objectives 
 * Boot Sector
